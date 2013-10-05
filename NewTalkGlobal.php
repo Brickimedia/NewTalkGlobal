@@ -9,6 +9,6 @@ $wgExtensionCredits['other'][] = array(
 		'version'  => 1.0,
 );
 
-$wgAutoloadClasses['NewTalkGlobalHooks'] = __DIR__ . '/NewTalkGlobal.hooks.php';
+$wgAutoloadClasses['NewTalkGlobal'] = __DIR__ . '/NewTalkGlobal.body.php';
 
-$wgHooks['UserClearNewTalkNotification'][] = 'NewTalkGlobalHooks::onUserClearNewTalkNotification';
+$wgHooks['GetNewMessagesAlert'][] = 'NewTalkGlobal::onGetNewMessagesAlert';
