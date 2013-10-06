@@ -1,14 +1,10 @@
 <?php
 
 class NewTalkGlobal {
-
-	public static function onUserRetrieveNewTalks( &$user, &$talks ) {
-		//$talks = array(); will prevent any old style new talk messages appearing
-	}
 	
-	public static function onGetNewMessagesAlert( string &$newMessagesAlert, array $newtalks, User $user, OutputPage $out ){
-
-		$newMessagesAlert = ""; //prevent alert showing before we change it
+	public static function onGetNewMessagesAlert( &$ntl, array $newtalks, User $user, OutputPage $out ){
+		
+		$ntl = '';
 		
 		global $newTalkGlobalDatabases;
 		
@@ -36,6 +32,18 @@ class NewTalkGlobal {
 				);
 			}
 		}
+		
+		$sep = str_replace( '_', ' ', wfMessage( 'newtalkseparator' )->escaped() );
+		$msgs = array();
+		
+		foreach ( $newtalks as $newtalk ) {
+			$msgs[] = Xml::element(
+					'a',
+					array( 'href' => $newtalk['link'] ), $newtalk['wiki']
+			);
+		}
+		$parts = implode( $sep, $msgs );
+		$ntl = wfMessage( 'youhavenewmessagesmulti' )->rawParams( $parts )->escaped();
 		
 		return true;
 	}

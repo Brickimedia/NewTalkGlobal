@@ -9,6 +9,7 @@ $wgExtensionCredits['other'][] = array(
 		'version'  => 1.0,
 );
 
+//require_once( __DIR__ . '/NewTalkGlobal.body.php' );
 $wgAutoloadClasses['NewTalkGlobal'] = __DIR__ . '/NewTalkGlobal.body.php';
 
 $wgHooks['GetNewMessagesAlert'][] = 'NewTalkGlobal::onGetNewMessagesAlert';
