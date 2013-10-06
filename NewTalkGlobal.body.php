@@ -8,6 +8,8 @@ class NewTalkGlobal {
 		
 		global $newTalkGlobalDatabases;
 		
+		$msgs = array();
+		
 		foreach( $newTalkGlobalDatabases as $wiki => $data ){
 			$dbr = wfGetDB( DB_SLAVE, array(), $data['db'] );
 				
@@ -26,25 +28,20 @@ class NewTalkGlobal {
 			}
 				
 			if( $res -> numRows() != 0 ){
-				$newtalks[] = array(
-						"link" => "{$data['url']}User_talk:$user",
-						"wiki" => $wiki
+				$msgs[] = Xml::element(
+						'a',
+						array( 'href' => "{$data['url']}User_talk:$user" ),
+						$wiki
 				);
 			}
 		}
 		
 		$sep = str_replace( '_', ' ', wfMessage( 'newtalkseparator' )->escaped() );
-		$msgs = array();
-		
-		foreach ( $newtalks as $newtalk ) {
-			$msgs[] = Xml::element(
-					'a',
-					array( 'href' => $newtalk['link'] ), $newtalk['wiki']
-			);
-		}
 		$parts = implode( $sep, $msgs );
-		$ntl = wfMessage( 'youhavenewmessagesmulti' )->rawParams( $parts )->escaped();
 		
+		if( count( $msgs )){
+			$ntl = wfMessage( 'youhavenewmessagesmulti' )->rawParams( $parts )->escaped();
+		}
 		return true;
 	}
 }
