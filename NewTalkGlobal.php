@@ -5,7 +5,7 @@ $wgExtensionCredits['other'][] = array(
 		'name' => 'NewTalkGlobal',
 		'author' => 'UltrasonicNXT/Adam Carter',
 		'url' => 'https://github.com/Brickimedia/NewTalkGlobal',
-		'description' => 'newtalkglobal-desc',
+		'descriptionmsg' => 'newtalkglobal-desc',
 		'version'  => 1.0,
 );
 
