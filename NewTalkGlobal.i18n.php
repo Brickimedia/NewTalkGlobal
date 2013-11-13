@@ -9,5 +9,5 @@ $messages[ 'en' ] = array(
 
 $messages[ 'qqq' ] = array(
 		'newtalkglobal' => "The name of the extension",
-		'globalcontribs-desc' => "{{desc}}",
+		'newtalkglobal-desc' => "{{desc}}",
 );
